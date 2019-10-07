@@ -15,11 +15,10 @@
   </thead>
 
   
-    <%= form_tag(cars_path, method: :get) do%>
-    <%= text_field_tag(:search, params[:seach]) %>
-    <%= submit_tag ("search") %>
-    <% end %>
-
+  <%= form_tag(parts_path, method: :get) do %>
+  <%= text_field_tag :term, params[:term] %>
+  <%= submit_tag 'Search', name: nil%>
+  <% end %>
 
   <tbody>
     <% @cars.each do |car| %>

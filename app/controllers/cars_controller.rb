@@ -5,7 +5,11 @@ class CarsController < ApplicationController
   # GET /cars
   # GET /cars.json
   def index
-    @cars = Car.all
+     @cars = if params[:term]
+      Car.where('name LIKE ?', "%#{params[:term]}%")
+    else
+      Car.all
+    end
   end
 
   # GET /cars/1
@@ -70,6 +74,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:make, :model, :vin, :year, :parts, :search)
+      params.require(:car).permit(:make, :model, :vin, :year, :parts, :term)
     end
 end
