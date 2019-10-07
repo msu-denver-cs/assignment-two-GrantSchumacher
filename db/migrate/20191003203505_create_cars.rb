@@ -5,9 +5,7 @@ class CreateCars < ActiveRecord::Migration[5.2]
       t.string :model
       t.string :vin
       t.integer :year
-      t.text :parts array: true, default: []
       
-
       t.timestamps
     end
   end

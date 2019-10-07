@@ -35,6 +35,7 @@
    <%= form.label "Parts", class: 'control-label'%>
       <div class="controls">
        <%= form.collection_select :parts_id, Part.all.map, :id, :name, {:include_blank => false}, {:multiple => true} %>
+       
       </div>
     </div> 
 
