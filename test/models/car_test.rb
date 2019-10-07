@@ -13,4 +13,12 @@ class CarTest < ActiveSupport::TestCase
   	assert car.errors[:parts].any?
   end
 
+  test "car year is greater than 1885 (year of first automobile)" do
+  	car = Car.new
+  	assert car.invalid?
+  	assert car.errors[:year].any?
+  	assert_operator car.year, :<, 1885 ["must be over 1885"]
+  end
+  	
+
 end
