@@ -14,6 +14,13 @@
     </tr>
   </thead>
 
+  
+    <%= form_tag(cars_path, method: :get) do%>
+    <%= text_field_tag(:search, params[:seach]) %>
+    <%= submit_tag ("search") %>
+    <% end %>
+
+
   <tbody>
     <% @cars.each do |car| %>
       <tr>
@@ -34,3 +41,4 @@
 
 <%= link_to 'New Car', new_car_path %>
 <%= link_to 'New Part', new_cars_part_url %>
+<%= link_to 'Back', cars_parts_path %>

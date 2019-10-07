@@ -1,10 +1,17 @@
 class PartsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_part, only: [:show, :edit, :update, :destroy]
 
   # GET /parts
   # GET /parts.json
   def index
-    @parts = Part.all
+    
+    @parts = if params[:term]
+      Part.where('name LIKE ?', "%#{params[:term]}%")
+    else
+      Part.all
+    end
+    
   end
 
   # GET /parts/1
@@ -70,6 +77,6 @@ class PartsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def part_params
-      params.require(:part).permit(:name)
+      params.require(:part).permit(:name, :term)
     end
 end

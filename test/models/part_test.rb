@@ -8,6 +8,5 @@ class PartTest < ActiveSupport::TestCase
   	part = Part.new 
   	assert part.invalid?
   	assert part.errors[:name].any?
-  	
   end
 end

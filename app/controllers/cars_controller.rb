@@ -1,4 +1,5 @@
 class CarsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_car, only: [:show, :edit, :update, :destroy]
 
   # GET /cars
@@ -69,6 +70,6 @@ class CarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_params
-      params.require(:car).permit(:make, :model, :vin, :year, :parts)
+      params.require(:car).permit(:make, :model, :vin, :year, :parts, :search)
     end
 end
