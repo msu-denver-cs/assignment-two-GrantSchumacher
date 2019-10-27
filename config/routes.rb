@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :parts
   resources :cars_parts
-  #root 'pages#home'
+  #root 'pages#index'
   root 'cars_parts#index'
   get 'cars_parts/index'
   resources :cars
