@@ -1,3 +1,5 @@
+
+
 <%= form_with(model: car, local: true) do |form| %>
   <% if car.errors.any? %>
     <div id="error_explanation">
@@ -34,10 +36,12 @@
      <div class="field">
    <%= form.label "Parts", class: 'control-label'%>
       <div class="controls">
-       <%= form.collection_select :parts_id, Part.all.map, :id, :name, {:include_blank => false}, {:multiple => true} %>
+       <%= form.collection_select :part, Part.all.map, :id, :name, {:include_blank => false}, {:multiple => true} %>
        
       </div>
     </div> 
+
+
 
   <div class="actions">
     <%= form.submit %>
