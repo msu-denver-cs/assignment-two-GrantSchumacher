@@ -1,33 +1,70 @@
 <html>
 <head>
-<title> SPA for CarsParts using JQuery </title>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
+<title> SPA for CarsParts using Java Script </title>
 </head>
 <body>
+
+
 <h1> Cars Parts </h1>
 
 <button onclick="fetch('cars', ['make', 'model', 'vin', 'year'])">Cars</button>
 <button onclick="fetch('parts', ['name'])">Parts</button>
 
-<div id="list"></div>
+<div id="list">
+</div>
 
 <script>
-	var fetch = function(which, fields){
-		$("#list").empty();
-		$.get("http://localhost:3000/" + which + ".json", true).done(function(json)){
-			for (item in json){
-				lis = "<li>";
-				for (field in fields){
-					lis += json[item][fields[field]] + " ";
-					
-				}
-				lis = "</li>";
-				$("#list").append(list);
-			}
-		}).fail(function(json){console.log("function failed"); })
-	};
+	/* This script is from Dr. Beaty's SPA example for Java Script, found at https://github.com/drsjb80/SPAs/blob/master/jsspa.html */
+
+var l = document.getElementById("list");
+
+//clears the current elemnt with ID list and resets the first child
+var clear = function() {
+    while (l.firstChild) {
+        l.removeChild(l.firstChild);
+    }
+};
+
+
+//creates a new XMLHttpRequest object
+var request = new XMLHttpRequest();
+
+//Fetch function for which ID and an array of possible fields for ID
+var fetch = function(which, fields) {
+
+	//Opens the JSON page with the ID "which"
+    request.open("GET", "http://localhost:3000/" + which + ".json", true);
+
+    //listens for state change
+    request.onreadystatechange = function () {
+        let done = 4, ok = 200;
+
+        //If the state has changed and is done / ok
+        if (request.readyState === done && request.status === ok) {
+
+        	//clears the current visible list
+            clear();
+            let ol = document.createElement('ol');
+            l.appendChild(ol);
+            let jo = JSON.parse(request.responseText);
+
+            //Iterates through the JSON page information and creates a visible HTML list element for each item 
+            for (i in jo) {
+            	console.log("item");
+                let li = document.createElement('li');
+                for (f in fields) {
+
+                	//Displays the item on the HTML list
+                    li.textContent += jo[i][fields[f]] + ' ';
+                }
+                ol.appendChild(li);
+            }
+        }
+    }
+    //Sends back null 
+    request.send (null);
+};
 </script>
+
 </body>
 </html>
