@@ -1,0 +1,33 @@
+<html>
+<head>
+<title> SPA for CarsParts using JQuery </title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+</head>
+<body>
+<h1> Cars Parts </h1>
+
+<button onclick="fetch('cars', ['make', 'model', 'vin', 'year'])">Cars</button>
+<button onclick="fetch('parts', ['name'])">Parts</button>
+
+<div id="list"></div>
+
+<script>
+	var fetch = function(which, fields){
+		$("#list").empty();
+		$.get("http://localhost:3000/" + which + ".json", true).done(function(json)){
+			for (item in json){
+				lis = "<li>";
+				for (field in fields){
+					lis += json[item][fields[field]] + " ";
+					
+				}
+				lis = "</li>";
+				$("#list").append(list);
+			}
+		}).fail(function(json){console.log("function failed"); })
+	};
+</script>
+</body>
+</html>
